@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class TiltPlane : MonoBehaviour
 {
+    public MarbleBehavior marbleController;
+
     public GameObject planeToTilt;
     public Vector3 rotationAmount;
-
-    public GameObject newMarble;
-    public Vector3 marbleStartPos;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,12 +28,8 @@ public class TiltPlane : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            SpawnMarble();
+            marbleController.SpawnMarble();
         }
     }
 
-    public void SpawnMarble()
-    {
-        Instantiate(newMarble, marbleStartPos, Quaternion.identity);
-    }
 }
