@@ -4,7 +4,9 @@ public class MarbleBehavior : MonoBehaviour
 {
     public GameObject marbleOriginal;
     public Vector3 marbleStartPos;
-    public GameObject collisionPlane;
+
+    //public TiltPlane planeController;
+    public CrowdMovement crowdController;
 
     GameObject newMarble;
 
@@ -15,15 +17,12 @@ public class MarbleBehavior : MonoBehaviour
         SpawnMarble();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SpawnMarble()
     {
         newMarble = Instantiate(marbleOriginal, marbleStartPos, Quaternion.identity);
         newMarble.SetActive(true);
+
+        crowdController.speed += 5;
+        //planeController.rotationAmount += new Vector3(0,0,2);
     }
 }
