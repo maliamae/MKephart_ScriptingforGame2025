@@ -4,14 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Cool
-  - NotCool
-  - Mid
-  - Floor
-  - Floor2
-  - CannonBall
-  - UpForce
-  - DownForce
+  - Key
+  - LockedWall
   layers:
   - Default
   - TransparentFX
