@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class LockedWallControl : MonoBehaviour
 {
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,23 +30,5 @@ public class LockedWallControl : MonoBehaviour
         }
 
     }
-
-    private void OnCollisionExit()
-    {
-        Debug.Log("EXIT");
-        this.gameObject.GetComponent<BoxCollider>().enabled = true;
-    }
-    /*
-    private void OnTriggerEnter(Collider otherObject)
-    {
-        
-        if(otherObject.gameObject.GetComponent<SphereCollider>().enabled == false)
-        {
-            otherObject.gameObject.GetComponent<SphereCollider>().enabled = true;
-        }
-        
-        Debug.Log("Exit");
-        otherObject.gameObject.GetComponent<SphereCollider>().enabled = true;
-    }
-    */
+    
 }
