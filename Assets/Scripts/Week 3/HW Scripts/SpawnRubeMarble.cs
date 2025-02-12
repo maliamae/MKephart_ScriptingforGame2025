@@ -17,7 +17,7 @@ public class SpawnRubeMarble : MonoBehaviour
     {
 
     }
-
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Key")
@@ -25,4 +25,5 @@ public class SpawnRubeMarble : MonoBehaviour
             this.GetComponent<MeshRenderer>().material.color = Color.yellow;
         }
     }
+    */
 }

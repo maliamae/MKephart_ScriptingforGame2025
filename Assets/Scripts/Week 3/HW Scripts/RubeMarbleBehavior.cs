@@ -22,12 +22,6 @@ public class RubeMarbleBehavior : MonoBehaviour
         {
             this.GetComponent<MeshRenderer>().material = yellowMat;
         }
-
-        
-        if(other.gameObject.tag == "LockedWall" && other.gameObject.GetComponent<MeshRenderer>().material == this.GetComponent<MeshRenderer>().material)
-        {
-            other.gameObject.GetComponent<BoxCollider>().enabled = false;
-        }
         
     }
 }
