@@ -4,6 +4,9 @@ public class SpawnRubeMarble : MonoBehaviour
 {
     public GameObject marblePrefab;
     public int startSpeed;
+    public Material blueMat;
+    public Material pinkMat;
+    int count = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,13 +20,23 @@ public class SpawnRubeMarble : MonoBehaviour
     {
 
     }
-    /*
-    private void OnTriggerEnter(Collider other)
+
+    public void SpawnMarble(Vector3 parentPosition)
     {
-        if (other.gameObject.tag == "Key")
+        Vector3 newPositionLeft = parentPosition + (Vector3.left * 2);
+        Vector3 newPositionRight = parentPosition + (Vector3.right * 2);
+        
+        if (count == 0)
         {
-            this.GetComponent<MeshRenderer>().material.color = Color.yellow;
+            GameObject marbleInstance = Instantiate(marblePrefab, newPositionLeft, Quaternion.identity);
+            marbleInstance.GetComponent<MeshRenderer>().material = blueMat;
         }
+        else if (count == 1)
+        {
+            GameObject marbleInstance = Instantiate(marblePrefab, newPositionRight, Quaternion.identity);
+            marbleInstance.GetComponent<MeshRenderer>().material = pinkMat;
+        }
+
+        count++;
     }
-    */
 }

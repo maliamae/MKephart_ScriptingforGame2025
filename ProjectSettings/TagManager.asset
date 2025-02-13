@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Key
   - LockedWall
+  - SplitKey
+  - Marble
   layers:
   - Default
   - TransparentFX

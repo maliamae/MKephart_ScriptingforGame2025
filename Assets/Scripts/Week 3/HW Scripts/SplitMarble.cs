@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class RubeMarbleBehavior : MonoBehaviour
+public class SplitMarble : MonoBehaviour
 {
-    public Material yellowMat;
-    public SpawnRubeMarble marbleController;
+    public SpawnRubeMarble marbleSpawner;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,9 +18,10 @@ public class RubeMarbleBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Key")
+        if (other.gameObject.tag == "Marble")
         {
-            this.GetComponent<MeshRenderer>().material = yellowMat;
+            marbleSpawner.SpawnMarble(other.transform.position);
+            marbleSpawner.SpawnMarble(other.transform.position);
             Destroy(other.gameObject);
         }
     }
