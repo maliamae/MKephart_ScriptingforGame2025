@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public class RubeMarbleBehavior : MonoBehaviour
+public class CameraSwitch : MonoBehaviour
 {
+    public Camera tutCamera;
+    public Camera mainCamera;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,10 +19,6 @@ public class RubeMarbleBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Key")
-        {
-            this.GetComponent<MeshRenderer>().material = other.gameObject.GetComponent<MeshRenderer>().material;
-            Destroy(other.gameObject);
-        }
+        tutCamera.enabled = false;
     }
 }

@@ -14,16 +14,11 @@ public class LockedWallControl : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision otherObject)
+    private void OnCollisionStay(Collision otherObject)
     {
         Debug.Log("Enter");
-        float buffer = otherObject.transform.position.z - 1f;
-        /*
-        if (otherObject.gameObject.GetComponent<MeshRenderer>().material.color == this.GetComponent<MeshRenderer>().material.color)
-        {
-            otherObject.gameObject.GetComponent<SphereCollider>().enabled = false;
-        }
-        */
+        
+        
         if (otherObject.gameObject.GetComponent<MeshRenderer>().material.color == this.GetComponent<MeshRenderer>().material.color)
         {
                 this.gameObject.GetComponent<BoxCollider>().enabled = false;

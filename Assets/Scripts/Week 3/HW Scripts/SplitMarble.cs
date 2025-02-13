@@ -18,6 +18,7 @@ public class SplitMarble : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("SPLIT DAMMIT");
         if (other.gameObject.tag == "Marble")
         {
             marbleSpawner.SpawnMarble(other.transform.position);
