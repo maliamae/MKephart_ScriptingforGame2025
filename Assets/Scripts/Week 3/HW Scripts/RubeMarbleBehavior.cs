@@ -19,7 +19,7 @@ public class RubeMarbleBehavior : MonoBehaviour
         if(other.gameObject.tag == "Key")
         {
             this.GetComponent<MeshRenderer>().material = other.gameObject.GetComponent<MeshRenderer>().material;
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
     }
 }

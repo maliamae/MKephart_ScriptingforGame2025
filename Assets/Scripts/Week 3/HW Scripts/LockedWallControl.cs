@@ -13,7 +13,17 @@ public class LockedWallControl : MonoBehaviour
     {
         
     }
+    private void OnCollisionEnter(Collision otherObject)
+    {
+        Debug.Log("Enter");
 
+
+        if (otherObject.gameObject.GetComponent<MeshRenderer>().material.color == this.GetComponent<MeshRenderer>().material.color)
+        {
+            this.gameObject.GetComponent<BoxCollider>().enabled = false;
+        }
+
+    }
     private void OnCollisionStay(Collision otherObject)
     {
         Debug.Log("Enter");
@@ -25,5 +35,6 @@ public class LockedWallControl : MonoBehaviour
         }
 
     }
+
     
 }

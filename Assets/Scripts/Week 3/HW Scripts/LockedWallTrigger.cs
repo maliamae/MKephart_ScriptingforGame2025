@@ -23,6 +23,10 @@ public class LockedWallTrigger : MonoBehaviour
         }
         */
         Debug.Log("Exit");
-        wallCollider.gameObject.GetComponent<BoxCollider>().enabled = true;
+        if (wallCollider.gameObject.GetComponent<BoxCollider>().enabled == false)
+        {
+            wallCollider.gameObject.GetComponent<BoxCollider>().enabled = true;
+        }
+        
     }
 }
