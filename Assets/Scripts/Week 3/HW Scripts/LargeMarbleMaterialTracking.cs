@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LargeMarbleMaterialTracking : MonoBehaviour
 {
@@ -24,9 +25,10 @@ public class LargeMarbleMaterialTracking : MonoBehaviour
 
     public void KeyCollected(GameObject key)
     {
-        if (key.activeSelf == false)
+        if(key.gameObject.activeSelf == false)
         {
             this.gameObject.GetComponent<MeshRenderer>().material.color = key.GetComponent<MeshRenderer>().material.color;
         }
+       
     }
 }

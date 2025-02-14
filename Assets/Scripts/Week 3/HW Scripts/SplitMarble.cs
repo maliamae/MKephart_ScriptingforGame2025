@@ -23,6 +23,7 @@ public class SplitMarble : MonoBehaviour
             marbleSpawner.SpawnMarble(other.transform.position);
             marbleSpawner.SpawnMarble(other.transform.position);
             Destroy(other.gameObject);
+            Destroy(this.gameObject);
         }
     }
 }
