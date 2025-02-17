@@ -15,6 +15,19 @@ public class CannonBall : MonoBehaviour
         
     }
 
+    public void AddRandomForce()
+    {
+        Vector3 randomDir = Vector3.zero;
+        randomDir.x = Random.Range(-1f, 1f);
+        randomDir.y = Random.Range(0f, 1f);
+        randomDir.z = Random.Range(-1f, 1f);
+
+        float forceMult = Random.Range(1000, 5000);
+
+        this.gameObject.GetComponent<Rigidbody>().AddForce(randomDir * forceMult);
+    }
+
+    /*
     private void OnCollisionEnter(Collision otherObject)
     {
         MeshRenderer cannonBallMeshRenderer = this.GetComponent<MeshRenderer>();
@@ -61,4 +74,5 @@ public class CannonBall : MonoBehaviour
             this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.down * 1500);
         }
     }
+    */
 }
