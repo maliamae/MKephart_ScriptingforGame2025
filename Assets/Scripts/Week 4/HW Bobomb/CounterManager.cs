@@ -1,10 +1,17 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CounterManager : MonoBehaviour
 {
-    public GameObject counterDisplay;
-    int count = 0;
+    public TextMeshProUGUI counterDisplay;
+    int playerCount = 0;
+
+    public float gameTime = 30f;
+    public float currentTime = 0f;
+
+    public SpawnEnemies enemiesController;
+    int totalCount;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,11 +22,35 @@ public class CounterManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.A))
-        {
-            count +=1;
+        currentTime += Time.deltaTime;
 
-            counterDisplay.GetComponent<TMPro.TextMeshPro>().text = "Kill Me";
+        if(currentTime <= gameTime)
+        {
+            if(Input.GetKeyDown(KeyCode.A))
+            {
+                playerCount +=1;
+                counterDisplay.text = playerCount.ToString();
+            }
+            else if (Input.GetKeyDown(KeyCode.B))
+            {
+                playerCount -= 1;
+                counterDisplay.text = playerCount.ToString();
+            }
         }
+        else if(currentTime >= gameTime)
+        {
+            Debug.Log("FREEZE");
+            totalCount = enemiesController.enemyList.Count;
+
+            if (playerCount == totalCount)
+            {
+                Debug.Log("WIN");
+            }
+            else
+            {
+                Debug.Log("LOSE");
+            }
+        }
+        
     }
 }
