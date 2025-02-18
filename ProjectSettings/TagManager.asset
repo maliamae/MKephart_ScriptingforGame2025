@@ -8,6 +8,8 @@ TagManager:
   - LockedWall
   - Marble
   - CamBarrier
+  - CannonBall
+  - Enemy
   layers:
   - Default
   - TransparentFX
