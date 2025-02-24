@@ -5,7 +5,10 @@ using UnityEngine.UI;
 public class CounterManager : MonoBehaviour
 {
     public TextMeshProUGUI counterDisplay;
+    public TextMeshProUGUI checkCounter;
+
     int playerCount = 0;
+    int checkCount = 0;
 
     public float gameTime = 30f;
     public float currentTime = 0f;
@@ -49,6 +52,12 @@ public class CounterManager : MonoBehaviour
             else
             {
                 Debug.Log("LOSE " + totalCount);
+            }
+
+            if(checkCount < totalCount)
+            {
+                checkCounter.text = checkCount.ToString();
+                checkCount++;
             }
         }
         

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ListTest : MonoBehaviour
+public class AllListTest : MonoBehaviour
 {
     public List<CannonBall> marbles = new List<CannonBall>();
     public GameObject cannonBallPrefab;
