@@ -7,75 +7,82 @@ public class CounterManager : MonoBehaviour
 {
     public TextMeshProUGUI counterDisplay;
     public TextMeshProUGUI checkCounter;
+    public TextMeshProUGUI timerDisplay;
 
     int playerCount = 0;
-    int checkCount = 0;
+    float checkCount = 0;
 
     public float gameTime = 30f;
     public float currentTime = 0f;
+    public float countDownTimer = 0f;
 
     public SpawnEnemies enemiesController;
     int totalCount;
 
+    bool gameFinish = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        countDownTimer = gameTime;
+        gameFinish = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentTime += Time.deltaTime;
+        
 
-        if(currentTime <= gameTime)
+        if (gameFinish == false)
         {
-            if(Input.GetKeyDown(KeyCode.A))
+            currentTime += Time.deltaTime;
+            countDownTimer -= Time.deltaTime;
+
+            timerDisplay.text = countDownTimer.ToString("#.00");
+
+            if (Input.GetKeyDown(KeyCode.A))
             {
-                playerCount +=1;
+                playerCount++;
                 counterDisplay.text = playerCount.ToString();
             }
             else if (Input.GetKeyDown(KeyCode.B))
             {
-                playerCount -= 1;
+                playerCount--;
                 counterDisplay.text = playerCount.ToString();
             }
-        }
-        else if(currentTime >= gameTime)
-        {
-            
-            Debug.Log("FREEZE");
-            totalCount = enemiesController.enemyList.Count;
-            /*
-            if (playerCount == totalCount)
-            {
-                Debug.Log("WIN " + totalCount);
-            }
-            else
-            {
-                Debug.Log("LOSE " + totalCount);
-            }
-            */
 
-            if(checkCount < totalCount)
+            if (countDownTimer <= 0)
             {
-                StartCoroutine(AddCheckCounter());
+                gameFinish = true;
+            }
+        }
+
+        if (gameFinish == true)
+        {
+            Debug.Log("FINSIH");
+            timerDisplay.text = "00.00";
+
+            totalCount = enemiesController.enemyList.Count;
+
+            if (checkCount <= totalCount)
+            {
+                Debug.Log("check: " + checkCount + " total: " + totalCount);
+                checkCount += Time.deltaTime * 10;
+                checkCounter.text = checkCount.ToString("F0");
+
+                checkCounter.fontSize += 0.2f;
             }
         }
         
     }
 
+    
     IEnumerator AddCheckCounter()
     {
-        while (checkCount <= totalCount)
-        {
-            yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f);
 
-            if (checkCount <= totalCount)
-            {
-                checkCounter.text = checkCount.ToString();
-                checkCount += 1;
-            }
-        }
+        checkCount++;
+        checkCounter.text = checkCount.ToString();
     }
+    
 }
