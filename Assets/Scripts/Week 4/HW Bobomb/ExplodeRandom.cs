@@ -25,29 +25,36 @@ public class ExplodeRandom : MonoBehaviour
 
     public void ExplodeRandomEnemy()
     {
-        int totalEnemies = enemyController.enemyList.Count;
-        int randomEnemyIndex = Random.Range(0, totalEnemies);
-        float randomTimeGap = Random.Range(explosionTimeGapMin, explosionTimeGapMax);
-
-        GameObject randomEnemy = enemyController.enemyList[randomEnemyIndex].gameObject;
-        randomEnemy.GetComponent<MeshRenderer>().material.color = Color.red;
-
-        StartCoroutine(ExplodeCoroutine(randomEnemy));
-
-
-        if (timeManager.currentTime <= timeManager.gameTime)
+        if (timeManager.currentTime < timeManager.gameTime)
         {
+            int totalEnemies = enemyController.enemyList.Count;
+            int randomEnemyIndex = Random.Range(0, totalEnemies);
+            float randomTimeGap = Random.Range(explosionTimeGapMin, explosionTimeGapMax);
+
+            GameObject randomEnemy = enemyController.enemyList[randomEnemyIndex].gameObject;
+            randomEnemy.GetComponent<MeshRenderer>().material.color = Color.red;
+
+            StartCoroutine(ExplodeCoroutine(randomEnemy));
+
             Debug.Log("BOOM");
             Invoke("ExplodeRandomEnemy", randomTimeGap);
+          
         }
 
     }
 
     IEnumerator ExplodeCoroutine(GameObject enemyOrb)
     {
-        yield return new WaitForSeconds(1);
-        Debug.Log("FREEZE BOOM");
-        enemyOrb.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        
+        if (timeManager.currentTime < timeManager.gameTime)
+        {
+            yield return new WaitForSeconds(1);
+            Debug.Log("FREEZE BOOM");
+            enemyController.enemyList.Remove(enemyOrb.GetComponent<EnemyOrbs>());
+            Destroy(enemyOrb);
+        }
+
+        //enemyOrb.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
     }
 
 }

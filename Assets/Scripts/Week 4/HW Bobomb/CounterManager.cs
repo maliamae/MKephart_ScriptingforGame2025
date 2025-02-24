@@ -44,11 +44,11 @@ public class CounterManager : MonoBehaviour
 
             if (playerCount == totalCount)
             {
-                Debug.Log("WIN");
+                Debug.Log("WIN " + totalCount);
             }
             else
             {
-                Debug.Log("LOSE");
+                Debug.Log("LOSE " + totalCount);
             }
         }
         

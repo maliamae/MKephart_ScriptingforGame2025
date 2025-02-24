@@ -1608,6 +1608,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyOrb
       objectReference: {fileID: 0}
+    - target: {fileID: 1115533802560594438, guid: 96075fc64ce95494b8536434e3d0f32b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4529668419731024780, guid: 96075fc64ce95494b8536434e3d0f32b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.47
