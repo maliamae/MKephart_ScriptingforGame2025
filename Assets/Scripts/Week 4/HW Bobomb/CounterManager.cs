@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,9 +43,10 @@ public class CounterManager : MonoBehaviour
         }
         else if(currentTime >= gameTime)
         {
+            
             Debug.Log("FREEZE");
             totalCount = enemiesController.enemyList.Count;
-
+            /*
             if (playerCount == totalCount)
             {
                 Debug.Log("WIN " + totalCount);
@@ -53,13 +55,27 @@ public class CounterManager : MonoBehaviour
             {
                 Debug.Log("LOSE " + totalCount);
             }
+            */
 
             if(checkCount < totalCount)
             {
-                checkCounter.text = checkCount.ToString();
-                checkCount++;
+                StartCoroutine(AddCheckCounter());
             }
         }
         
+    }
+
+    IEnumerator AddCheckCounter()
+    {
+        while (checkCount <= totalCount)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            if (checkCount <= totalCount)
+            {
+                checkCounter.text = checkCount.ToString();
+                checkCount += 1;
+            }
+        }
     }
 }
