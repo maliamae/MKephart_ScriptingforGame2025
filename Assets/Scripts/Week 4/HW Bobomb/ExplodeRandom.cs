@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ExplodeRandom : MonoBehaviour
@@ -8,7 +10,7 @@ public class ExplodeRandom : MonoBehaviour
     public float explosionTimeLimit = 25f;
     public float explosionTimeGapMin = 5f;
     public float explosionTimeGapMax = 10f;
-
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,16 +26,28 @@ public class ExplodeRandom : MonoBehaviour
     public void ExplodeRandomEnemy()
     {
         int totalEnemies = enemyController.enemyList.Count;
-        int randomEnemy = Random.Range(0, totalEnemies);
+        int randomEnemyIndex = Random.Range(0, totalEnemies);
         float randomTimeGap = Random.Range(explosionTimeGapMin, explosionTimeGapMax);
 
-        enemyController.enemyList[randomEnemy].gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
-        enemyController.enemyList[randomEnemy].gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        GameObject randomEnemy = enemyController.enemyList[randomEnemyIndex].gameObject;
+        randomEnemy.GetComponent<MeshRenderer>().material.color = Color.red;
 
-        if(timeManager.currentTime <= timeManager.gameTime)
+        StartCoroutine(ExplodeCoroutine(randomEnemy));
+
+
+        if (timeManager.currentTime <= timeManager.gameTime)
         {
-            Invoke("ExplodeRandomEnemt", randomTimeGap);
+            Debug.Log("BOOM");
+            Invoke("ExplodeRandomEnemy", randomTimeGap);
         }
 
     }
+
+    IEnumerator ExplodeCoroutine(GameObject enemyOrb)
+    {
+        yield return new WaitForSeconds(1);
+        Debug.Log("FREEZE BOOM");
+        enemyOrb.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+    }
+
 }

@@ -18,6 +18,11 @@ public class EnemyOrbs : MonoBehaviour
     void Update()
     {
         currentTime += Time.deltaTime;
+        if (currentTime >= gameTime)
+        {
+            Debug.Log("orb freeze");
+            this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        }
     }
     public void AddRandomForce()
     {
@@ -38,11 +43,6 @@ public class EnemyOrbs : MonoBehaviour
         {
             Invoke("AddRandomForce", randomTimeGap);
             
-        }
-        else if (currentTime >= gameTime)
-        {
-            Debug.Log("orb freeze");
-            this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
         
     }
