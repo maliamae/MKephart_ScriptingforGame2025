@@ -24,7 +24,7 @@ public class EnemyOrbs : MonoBehaviour
 
         if (currentTime >= gameTime) //freezes all Bobombs as soon as the game time is over
         {
-            this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            this.gameObject.GetComponentInChildren<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
     }
 
@@ -40,7 +40,7 @@ public class EnemyOrbs : MonoBehaviour
 
         float randomTimeGap = Random.Range(forceTimeGapMin, forceTimeGapMax); //random time delay
 
-        this.gameObject.GetComponent<Rigidbody>().AddForce(randomDir * forceMult); 
+        this.gameObject.GetComponentInChildren<Rigidbody>().AddForce(randomDir * forceMult); 
 
         if(currentTime <= gameTime) //only continues to add force if the game time is not over
         {

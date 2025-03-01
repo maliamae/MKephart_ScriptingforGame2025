@@ -8,6 +8,7 @@ public class ExplodeRandom : MonoBehaviour
 
     public SpawnEnemies enemyController; // to access list of total Bobombs
     public CounterManager timeManager; //to access current time
+    //public SwapMesh meshController; 
 
     public float explosionTimeLimit = 25f; //Bobombs can only explode within first 25 seconds of game
     public float explosionTimeGapMin = 5f; //minimum amount of time between explosions
@@ -37,7 +38,10 @@ public class ExplodeRandom : MonoBehaviour
             float randomTimeGap = Random.Range(explosionTimeGapMin, explosionTimeGapMax); //selects a random time before the next explosion
             
             GameObject randomEnemy = enemyController.enemyList[randomEnemyIndex].gameObject; //simplifies accessing the game object (Bobomb) that was randomly selected 
-            randomEnemy.GetComponent<MeshRenderer>().material.color = Color.red; //change Bobomb color to red
+
+            //meshController.SetPuffActive(randomEnemy);
+            SwapMesh(randomEnemy);
+            randomEnemy.GetComponentInChildren<MeshRenderer>().material.color = Color.red; //change Bobomb color to red
 
             StartCoroutine(ExplodeCoroutine(randomEnemy)); //begins coroutine that actually destroys Bobomb
 
@@ -53,7 +57,7 @@ public class ExplodeRandom : MonoBehaviour
         if (timeManager.currentTime < explosionTimeLimit)
         {
             float enemySize = 0; //used to limit while loop
-            Vector3 scaleUpIncrement = Vector3.one * 0.05f; //step to scale up before being destroyed
+            Vector3 scaleUpIncrement = Vector3.one * 0.065f; //step to scale up before being destroyed
 
             while (enemySize <= 0.5f) // repeats every 0.1 seconds until the size is 0.5
             {
@@ -71,6 +75,16 @@ public class ExplodeRandom : MonoBehaviour
         }
 
         //enemyOrb.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+    }
+
+    public void SwapMesh(GameObject parentObject)
+    {
+        Debug.Log("Swap");
+        GameObject fishFlat = parentObject.transform.GetChild(1).gameObject;
+        GameObject fishPuff = parentObject.transform.GetChild(0).gameObject;
+
+        fishFlat.SetActive(false);
+        fishPuff.SetActive(true);
     }
 
 }
