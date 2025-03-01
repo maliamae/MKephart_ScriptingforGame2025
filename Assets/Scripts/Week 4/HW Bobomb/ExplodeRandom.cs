@@ -8,7 +8,6 @@ public class ExplodeRandom : MonoBehaviour
 
     public SpawnEnemies enemyController; // to access list of total Bobombs
     public CounterManager timeManager; //to access current time
-    //public SwapMesh meshController; 
 
     public float explosionTimeLimit = 25f; //Bobombs can only explode within first 25 seconds of game
     public float explosionTimeGapMin = 5f; //minimum amount of time between explosions
@@ -39,8 +38,7 @@ public class ExplodeRandom : MonoBehaviour
             
             GameObject randomEnemy = enemyController.enemyList[randomEnemyIndex].gameObject; //simplifies accessing the game object (Bobomb) that was randomly selected 
 
-            //meshController.SetPuffActive(randomEnemy);
-            SwapMesh(randomEnemy);
+            SwapMesh(randomEnemy); //calls function to activate puffed up version of the model
             randomEnemy.GetComponentInChildren<MeshRenderer>().material.color = Color.red; //change Bobomb color to red
 
             StartCoroutine(ExplodeCoroutine(randomEnemy)); //begins coroutine that actually destroys Bobomb
@@ -77,14 +75,14 @@ public class ExplodeRandom : MonoBehaviour
         //enemyOrb.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
     }
 
+    //the following function swaps the active mesh of the parent object when called
     public void SwapMesh(GameObject parentObject)
     {
-        Debug.Log("Swap");
-        GameObject fishFlat = parentObject.transform.GetChild(1).gameObject;
-        GameObject fishPuff = parentObject.transform.GetChild(0).gameObject;
+        GameObject fishFlat = parentObject.transform.GetChild(1).gameObject; //abstracts second child object of chosen gameobject
+        GameObject fishPuff = parentObject.transform.GetChild(0).gameObject; //abstracts first child object of chosen gameobject
 
-        fishFlat.SetActive(false);
-        fishPuff.SetActive(true);
+        fishFlat.SetActive(false); //current active mesh set to false
+        fishPuff.SetActive(true); //puffed mesh set to active
     }
 
 }
