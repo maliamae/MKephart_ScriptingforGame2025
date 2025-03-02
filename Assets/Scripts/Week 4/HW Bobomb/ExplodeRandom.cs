@@ -39,7 +39,7 @@ public class ExplodeRandom : MonoBehaviour
             GameObject randomEnemy = enemyController.enemyList[randomEnemyIndex].gameObject; //simplifies accessing the game object (Bobomb) that was randomly selected 
 
             SwapMesh(randomEnemy); //calls function to activate puffed up version of the model
-            randomEnemy.GetComponentInChildren<MeshRenderer>().material.color = Color.red; //change Bobomb color to red
+            //randomEnemy.GetComponentInChildren<MeshRenderer>().material.color = Color.red; //change Bobomb color to red
 
             StartCoroutine(ExplodeCoroutine(randomEnemy)); //begins coroutine that actually destroys Bobomb
 

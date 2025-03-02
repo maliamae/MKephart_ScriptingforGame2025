@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5918437707618555169}
   - component: {fileID: 2526101747704514123}
-  - component: {fileID: 6794510755700421079}
   m_Layer: 0
   m_Name: TestFish
   m_TagString: Enemy
@@ -50,19 +49,6 @@ MonoBehaviour:
   forceTimeGapMax: 3
   forceTimeGapMin: 1
   gameTime: 30
---- !u!114 &6794510755700421079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8532700286972482080}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c240d9aed2b554a4cbb8dc89bac97a35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyController: {fileID: 0}
 --- !u!1001 &54160084171020440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -126,7 +112,7 @@ PrefabInstance:
     - target: {fileID: 6251712902383494290, guid: d88aad2feacf4bf4d9b4537926720864, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: d424da1682090574a9c91ba1aa1d03b9, type: 2}
+      objectReference: {fileID: 2100000, guid: dc2f4f82a67f4374b8cea3989f6def82, type: 2}
     - target: {fileID: 6401400146422457271, guid: d88aad2feacf4bf4d9b4537926720864, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -153,6 +139,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5148843751049961273, guid: ea414d97872d97149b53956a25ab0b70, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: de51c30a5a0aee74b95f2541a5a0aca5, type: 2}
     - target: {fileID: 6286869774014964822, guid: ea414d97872d97149b53956a25ab0b70, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

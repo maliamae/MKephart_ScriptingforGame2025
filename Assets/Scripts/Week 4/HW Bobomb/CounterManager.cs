@@ -22,6 +22,7 @@ public class CounterManager : MonoBehaviour
     int totalCount; //total number of Bobombs at the end 
 
     bool gameFinish = false; //used to limit actions to during game time and after game time
+    bool fontReset = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -59,6 +60,11 @@ public class CounterManager : MonoBehaviour
         //once the game is over...
         if (gameFinish == true)
         {
+            if (fontReset == false)
+            {
+                checkCounter.fontSize = 36f;
+                fontReset = true;
+            }
             timerDisplay.text = "00:00"; //ensures the displayed time is always 00:00 when the game is over
 
             totalCount = enemiesController.enemyList.Count; //actual total number of Bobombs remaining
