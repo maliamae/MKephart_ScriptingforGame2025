@@ -58,7 +58,7 @@ public class EnemyOrbs : MonoBehaviour
     {
         if(currentTime >= 0.1f)
         {
-            Debug.Log("collides");
+            //Debug.Log("collides");
             audioController.PlayOneShot(boingClip);
         }
        

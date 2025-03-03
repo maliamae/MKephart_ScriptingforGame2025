@@ -10,6 +10,7 @@ TagManager:
   - CamBarrier
   - CannonBall
   - Enemy
+  - Door
   layers:
   - Default
   - TransparentFX
