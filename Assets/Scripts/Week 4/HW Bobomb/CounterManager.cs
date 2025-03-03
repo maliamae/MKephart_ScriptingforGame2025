@@ -10,6 +10,8 @@ public class CounterManager : MonoBehaviour
     public TextMeshProUGUI counterDisplay; //displays player counter
     public TextMeshProUGUI checkCounter; //displays actual total at end
     public TextMeshProUGUI timerDisplay; //displays the timer
+    public GameObject winImage;
+    public GameObject loseImage;
 
     int playerCount = 0; //variable player manipulates up or down
     float checkCount = 0; //variable used to count up to the total number at the end
@@ -22,7 +24,12 @@ public class CounterManager : MonoBehaviour
     int totalCount; //total number of Bobombs at the end 
 
     bool gameFinish = false; //used to limit actions to during game time and after game time
-    bool fontReset = false;
+    bool fontReset = false; //used to set the font size of the win counter display to the correct size when the game ends
+    bool finish = false;
+
+    public AudioSource audioController;
+    public AudioClip booSound;
+    public AudioClip cheerSound;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -79,13 +86,19 @@ public class CounterManager : MonoBehaviour
             }
             else if (checkCount >= totalCount) //once the number is revealed to the player, win/lose condition is determined
             {
-                if (playerCount == totalCount)
+                if (playerCount == totalCount && finish == false)
                 {
+                    winImage.SetActive(true);
+                    audioController.PlayOneShot(cheerSound);
                     Debug.Log("YOU WIN");
+                    finish = true;
                 }
-                else if (playerCount != totalCount)
+                else if (playerCount != totalCount && finish == false)
                 {
+                    loseImage.SetActive(true);
+                    audioController.PlayOneShot(booSound);
                     Debug.Log("YOU LOSE");
+                    finish = true;
                 }
             }
 

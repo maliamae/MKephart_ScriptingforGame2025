@@ -11,6 +11,10 @@ public class EnemyOrbs : MonoBehaviour
     public float gameTime = 30f; //maximum game time
     float currentTime = 0f; //current time
 
+    public AudioClip boingClip;
+    public AudioSource audioController;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -48,5 +52,15 @@ public class EnemyOrbs : MonoBehaviour
             
         }
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(currentTime >= 0.1f)
+        {
+            Debug.Log("collides");
+            audioController.PlayOneShot(boingClip);
+        }
+       
     }
 }
