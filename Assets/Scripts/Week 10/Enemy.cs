@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,9 +11,16 @@ public class Enemy : MonoBehaviour
 
     protected Player player;
 
+    protected NavMeshAgent navAgent;
+
+    protected bool hasSeenPlayer = false;
+
     void Start()
     {
         player = FindAnyObjectByType<Player>();
+        navAgent = GetComponent<NavMeshAgent>();
+
+        //navAgent.SetDestination(player.transform.position);
     }
 
     protected virtual void Attack()
@@ -35,18 +43,74 @@ public class Enemy : MonoBehaviour
         //OR
         //Destroy the object
     }
+
+    public virtual void SeePlayer()
+    {
+        RaycastHit hit;
+
+        Vector3 dir = player.transform.position - this.transform.position;
+        dir.Normalize();
+
+        if (Physics.Raycast(this.transform.position, dir, out hit))
+        {
+            if (hit.collider.tag == "Player")
+            {
+                hasSeenPlayer = true;
+            }
+        }
+        
+    }
+
     protected virtual void Update()
     {
-        if (Vector3.Distance(this.transform.position, player.transform.position) < attackRange)
+        if (hasSeenPlayer == true)
         {
-            attackTimer += Time.deltaTime;
-
-            if(attackTimer > attackSpeed)
+            if (Vector3.Distance(this.transform.position, player.transform.position) > attackRange)
             {
-                Attack();
-                attackTimer = 0;
+                navAgent.SetDestination(player.transform.position);
+                navAgent.isStopped = false;
             }
-            
+            else
+            {
+                RaycastHit hit;
+                Vector3 dir = player.transform.position - this.transform.position;
+                dir.Normalize();
+
+                if (Physics.Raycast(this.transform.position, dir, out hit))
+                {
+                    if (hit.collider.tag == "Player")
+                    {
+                        navAgent.isStopped = true;
+                        this.transform.LookAt(player.transform.position);
+
+                        if (Vector3.Distance(this.transform.position, player.transform.position) < attackRange)
+                        {
+                            attackTimer += Time.deltaTime;
+
+                            if (attackTimer > attackSpeed)
+                            {
+                                Attack();
+                                attackTimer = 0;
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        navAgent.SetDestination(player.transform.position);
+                        navAgent.isStopped = false;
+                    }
+
+                }
+
+
+            }
         }
+        
+
+
+
+        
+        
     }
 }
